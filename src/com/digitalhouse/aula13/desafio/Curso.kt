@@ -8,6 +8,6 @@ class Curso(val nome: String, val codigo: Int, val professorTitular: ProfessorTi
         TODO( "Implementar método ")
     }
     fun excluirAluno(umAluno: Aluno){
-        
+
     }
 }
