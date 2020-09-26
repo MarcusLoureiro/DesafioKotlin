@@ -26,7 +26,7 @@ fun main() {
     digitalHouseManager.matricularAluno(15, 20002)
     digitalHouseManager.matricularAluno(5, 20002)
 
-    
+
     /*digitalHouseManager.exibirCursos()
     digitalHouseManager.exibirAlunos()
     digitalHouseManager.exibirProfessores()

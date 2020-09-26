@@ -8,12 +8,10 @@ class DigitalHouseManager() {
     val listaProfessoresAdjunto = mutableListOf<ProfessorAdjunto>()
     val listaCursos = mutableListOf<Curso>()
     val listaMatriculas = mutableListOf<Matricula>()
-
     fun registrarCurso(nome: String, codigoCurso: Int, qtdMaxAlunos: Int) {
         val cursoNovo = Curso(nome, codigoCurso, qtdMaxAlunos)
         listaCursos.add(cursoNovo)
     }
-
     fun excluirCurso(codigoCurso: Int) {
         for (curso in listaCursos) {
             if (curso.codigo == codigoCurso) {
@@ -22,7 +20,6 @@ class DigitalHouseManager() {
             }
         }
     }
-
     fun exibirCursos(){
         println("===========================================================================================")
         println("Lista de Cursos:")
@@ -35,17 +32,14 @@ class DigitalHouseManager() {
         }
         println("===========================================================================================")
     }
-
     fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigoProfessor: Int, qtdHoras: Int) {
         val novoProfessor = ProfessorAdjunto(nome, sobrenome, 0, codigoProfessor, qtdHoras)
         listaProfessoresAdjunto.add(novoProfessor)
     }
-
     fun registrarProfessorTitular(nome: String, sobrenome: String, codigoProfessor: Int, especialidade: String) {
         val novoProfessor = ProfessorTitular(nome, sobrenome, 0, codigoProfessor, especialidade)
         listaProfessoresTitular.add(novoProfessor)
     }
-
     fun exibirProfessores(){
         println("===========================================================================================")
         println("Lista de Professores:")
@@ -59,8 +53,6 @@ class DigitalHouseManager() {
         }
         println("===========================================================================================")
     }
-
-
     fun excluirProfessor(codigoProfessor: Int) {
 
         for (professor in listaProfessoresTitular) {
@@ -92,12 +84,10 @@ class DigitalHouseManager() {
             }
         }
     }
-
     fun registrarAluno(nome: String, sobrenome: String, codigoAluno: Int) {
         val novoAluno = Aluno(nome, sobrenome, codigoAluno)
         listaAlunos.add(novoAluno)
     }
-
     fun matricularAluno(codigoAluno: Int, codigoCurso: Int) {
         var date = Date()
         var numerosMatriculados = 0
@@ -129,7 +119,6 @@ class DigitalHouseManager() {
         }
         println("===========================================================================================")
     }
-
     fun exibirAlunos(){
         println("===========================================================================================")
         println("Lista de Alunos:")
