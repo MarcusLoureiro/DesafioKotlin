@@ -1,6 +1,8 @@
 package com.digitalhouse.aula13.desafio
 
-class Curso(val nome: String, val codigo: Int, var professorTitular: ProfessorTitular, var professorAdjunto: ProfessorAdjunto, val qtdMaximaAlunos: Int) {
+class Curso(val nome: String, val codigo: Int, val qtdMaximaAlunos: Int) {
+    lateinit var professorTitular: ProfessorTitular
+    lateinit var professorAdjunto: ProfessorAdjunto
     val listaAlunosMatriculados = mutableListOf<Aluno>()
     override fun equals(other: Any?): Boolean {
         return(other is Curso) && (codigo == other.codigo)
