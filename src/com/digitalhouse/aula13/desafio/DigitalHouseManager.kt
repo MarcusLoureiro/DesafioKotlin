@@ -4,7 +4,8 @@ import java.util.*
 
 class DigitalHouseManager() {
     val listaAlunos = mutableListOf<Aluno>()
-    val listaProfessores = mutableListOf<Professor>()
+    val listaProfessoresTitular = mutableListOf<ProfessorTitular>()
+    val listaProfessoresAdjunto = mutableListOf<ProfessorAdjunto>()
     val listaCursos = mutableListOf<Curso>()
     val listaMatriculas = mutableListOf<Matricula>()
 
@@ -23,18 +24,23 @@ class DigitalHouseManager() {
 
     fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigoProfessor: Int, qtdHoras: Int) {
         val novoProfessor = ProfessorAdjunto(nome, sobrenome, 0, codigoProfessor, qtdHoras)
-        listaProfessores.add(novoProfessor)
+        listaProfessoresAdjunto.add(novoProfessor)
     }
 
     fun registrarProfessorTitular(nome: String, sobrenome: String, codigoProfessor: Int, especialidade: String) {
         val novoProfessor = ProfessorTitular(nome, sobrenome, 0, codigoProfessor, especialidade)
-        listaProfessores.add(novoProfessor)
+        listaProfessoresTitular.add(novoProfessor)
     }
 
     fun excluirProfessor(codigoProfessor: Int) {
         for (professor in listaCursos) {
             if (professor.codigo == codigoProfessor) {
-                listaProfessores.remove(professor)
+                listaProfessoresTitular.remove(professor)
+            }
+        }
+        for (professor in listaCursos) {
+            if (professor.codigo == codigoProfessor) {
+                listaProfessoresAdjunto.remove(professor)
             }
         }
     }
@@ -44,18 +50,41 @@ class DigitalHouseManager() {
         listaAlunos.add(novoAluno)
     }
 
-    fun matricularAluno(codigoAluno: Int, codigoCurso: Int){
-        var alunoNovo: Aluno
-        var cursoNovo: Curso
-        var data = Date()
-        for(aluno in listaAlunos){
-            if(aluno.codigo == codigoAluno){
-                 alunoNovo = aluno
+    fun matricularAluno(codigoAluno: Int, codigoCurso: Int) {
+        var date = Date()
+        var numerosMatriculados = 0
+        for (curso in listaCursos) {
+            if (curso.qtdMaximaAlunos < numerosMatriculados) {
+                if (curso.codigo == codigoCurso) {
+                    for (aluno in listaAlunos) {
+                        if (aluno.codigo == codigoAluno) {
+                            var alunoNovo = aluno
+                            var novaMatricula = Matricula(aluno, curso, date)
+                            listaMatriculas.add(novaMatricula)
+                            numerosMatriculados = +1
+                        }
+                    }
+                }
+            } else {
+                println("Aluno não pode ser matriculado neste curso, pois não existem vagas disponíveis!")
             }
         }
-        for(curso in listaCursos){
-            if(curso.codigo == codigoCurso)
-                 cursoNovo = curso
+    }
+
+    fun alocarProfessor(codigoCurso: Int, codigoProfessorTitular: Int, codigoProfessorAdjunto: Int) {
+        for (curso in listaCursos) {
+            if (curso.codigo == codigoCurso) {
+                for (professor in listaProfessoresTitular) {
+                    if (professor.codigo == codigoProfessorTitular) {
+                        curso.professorTitular = professor
+                    }
+                }
+                for (professor in listaProfessoresAdjunto) {
+                    if (professor.codigo == codigoProfessorAdjunto) {
+                        curso.professorAdjunto = professor
+                    }
+                }
+            }
         }
     }
 }
